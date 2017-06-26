@@ -47,7 +47,8 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.DefinePlugin(config.compilerGlobals),
-    new webpack.ProvidePlugin({})
+    new webpack.ProvidePlugin({
+    })
   ]
 }
 
