@@ -1,6 +1,5 @@
 {
   "presets": [
-    "babel-preset-react",
     ["babel-preset-env", {
       "modules": "commonjs",
       "targets": {
@@ -25,7 +24,6 @@
       {
         "useBuiltIns": true // polyfill Object.assign in client/normalize.js
       }
-    ],
-    ["import", [{"libraryName": "antd", "style": "css" }]]
+    ]
   ]
 }

@@ -16,12 +16,16 @@ const mainEntry = [paths.client('main')]
 if (__DEV__) {
   mainEntry.push(`webpack-hot-middleware/client.js?path=${config.compilerPublicPath}__webpack_hmr`)
 }
+const entry = {
+  main: mainEntry,
+  normalize: [paths.client('normalize')]
+}
+if (config.compilerVendors && config.compilerVendors.length) {
+  entry['vendor'] = config.compilerVendors
+}
+
 const webpackConfig = {
-  entry: {
-    main: mainEntry,
-    vendor: config.compilerVendors,
-    normalize: [paths.client('normalize')]
-  },
+  entry: entry,
   output: {
     path: paths.dist(),
     filename: __DEV__ ? `[name].bundle.js` : `[name].[${config.compilerHashType}].bundle.js`,
@@ -43,11 +47,7 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.DefinePlugin(config.compilerGlobals),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
-    })
+    new webpack.ProvidePlugin({})
   ]
 }
 
@@ -63,7 +63,6 @@ webpackConfig.module.rules.push({
     options: {
       cacheDirectory: true,
       presets: [
-        'babel-preset-react',
         ['babel-preset-env', {
           modules: false,
           targets: {
@@ -87,8 +86,7 @@ webpackConfig.module.rules.push({
           {
             useBuiltIns: true // polyfill Object.assign in client/normalize.js
           }
-        ],
-        ['import', [{ libraryName: 'antd', style: "css" }]]
+        ]
       ]
     }
   }]

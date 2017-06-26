@@ -3,12 +3,10 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "standard",
-    "standard-react"
+    "standard"
   ],
   "plugins": [
     "babel",
-    "react",
     "promise"
   ],
   "env": {
@@ -68,16 +66,9 @@
     "babel/object-shorthand": 0,
     "babel/arrow-parens": 1,
     "babel/no-await-in-loop": 1,
-    "react/jsx-indent-props": 0,
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/prop-types": 0,
-    "react/react-in-jsx-scope": 2,
-    "react/self-closing-comp": 0,
 
     // Styles
     "quotes": [2, "single"],                    // specify whether double or single quotes should be used
-    "jsx-quotes": [2, "prefer-single"],
     "semi": [2, "never"],                       // require or disallow use of semicolons instead of ASI
     "max-len": [2, 250, 2],                     // specify the maximum length of a line in your program (off by default)
     "object-curly-spacing": [2, "always"],      // specify 2 curly spacing

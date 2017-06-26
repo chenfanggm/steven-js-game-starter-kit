@@ -1,5 +1,3 @@
-const httpStatus = require('http-status')
-
 const ExtendableError = function (message, status, isPublic) {
   Error.call(this, message)
   this.name = this.constructor.name
@@ -11,7 +9,7 @@ const ExtendableError = function (message, status, isPublic) {
 }
 
 const APIError = function (message, status, isPublic) {
-  if (status === undefined) status = httpStatus.INTERNAL_SERVER_ERROR
+  if (status === undefined) status = 500
   if (isPublic === undefined) isPublic = false
   ExtendableError.call(this, message, status, isPublic)
 }

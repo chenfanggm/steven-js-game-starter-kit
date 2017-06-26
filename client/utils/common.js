@@ -1,6 +1,6 @@
-/*************
- * Request
- *************/
+// ------------------------------------
+// Request
+// ------------------------------------
 export const errorFilter = ({ withJsonFilter } = { withJsonFilter: true }) =>
   (response) => {
     if (!response.ok) {
