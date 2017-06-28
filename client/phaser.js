@@ -23555,8 +23555,6 @@ var Game = function (config)
     window.game = this;
 };
 
-Game.prototype.constructor = Game;
-
 Game.prototype = {
 
     boot: function ()
@@ -23642,6 +23640,9 @@ Game.prototype = {
         this.loop.focus();
     }
 };
+
+Game.prototype.constructor = Game;
+
 
 module.exports = Game;
 
