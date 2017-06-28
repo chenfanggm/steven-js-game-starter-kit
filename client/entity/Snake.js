@@ -8,11 +8,11 @@ const Snake = new Phaser.Class({
 
   initialize: function Snake(state, x, y) {
     this.audioContext = state.global.audioContext
+    this.layer = state.add.layer()
+
     this.headPosition = new Phaser.Geom.Point(x, y)
 
-    this.body = state.add.layer()
-
-    this.head = this.body.create(x * 16, y * 16, 'body')
+    this.head = this.layer.create(x * 16, y * 16, 'body')
     this.head.setOrigin(0)
 
     this.alive = true
@@ -35,48 +35,12 @@ const Snake = new Phaser.Class({
   },
 
   update: function (time) {
-    if (time >= this.moveTime)
-    {
+    if (time >= this.moveTime) {
       return this.move(time)
     }
   },
 
-  faceLeft: function () {
-    if (this.direction === UP || this.direction === DOWN)
-    {
-      this.heading = LEFT
-    }
-  },
-
-  faceRight: function () {
-    if (this.direction === UP || this.direction === DOWN)
-    {
-      this.heading = RIGHT
-    }
-  },
-
-  faceUp: function () {
-    if (this.direction === LEFT || this.direction === RIGHT)
-    {
-      this.heading = UP
-    }
-  },
-
-  faceDown: function () {
-    if (this.direction === LEFT || this.direction === RIGHT)
-    {
-      this.heading = DOWN
-    }
-  },
-
   move: function (time) {
-    /**
-     * Based on the heading property (which is the direction the player pressed)
-     * we update the headPosition value accordingly.
-     *
-     * The Math.wrap call allow the snake to wrap around the screen, so when
-     * it goes off any of the sides it re-appears on the other.
-     */
     switch (this.heading) {
       case LEFT:
         this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 1, 0, 40)
@@ -98,12 +62,9 @@ const Snake = new Phaser.Class({
     this.direction = this.heading
 
     //  Update the body segments and place the last coordinate into this.tail
-    this.body.shiftPosition(this.headPosition.x * 16, this.headPosition.y * 16, 1, this.tail)
+    this.layer.shiftPosition(this.headPosition.x * 16, this.headPosition.y * 16, 1, this.tail)
 
-    //  Check to see if any of the body pieces have the same x/y as the head
-    //  If they do, the head ran into the body
-
-    const hitBody = this.body.getFirst({ x: this.head.x, y: this.head.y }, 1)
+    const hitBody = this.layer.getFirst({ x: this.head.x, y: this.head.y }, 1)
 
     if (hitBody) {
       console.log('dead')
@@ -122,8 +83,32 @@ const Snake = new Phaser.Class({
     }
   },
 
+  faceLeft: function () {
+    if (this.direction === UP || this.direction === DOWN) {
+      this.heading = LEFT
+    }
+  },
+
+  faceRight: function () {
+    if (this.direction === UP || this.direction === DOWN) {
+      this.heading = RIGHT
+    }
+  },
+
+  faceUp: function () {
+    if (this.direction === LEFT || this.direction === RIGHT) {
+      this.heading = UP
+    }
+  },
+
+  faceDown: function () {
+    if (this.direction === LEFT || this.direction === RIGHT) {
+      this.heading = DOWN
+    }
+  },
+
   grow: function () {
-    const newPart = this.body.create(this.tail.x, this.tail.y, 'body')
+    const newPart = this.layer.create(this.tail.x, this.tail.y, 'body')
 
     newPart.setOrigin(0)
   },
@@ -151,7 +136,7 @@ const Snake = new Phaser.Class({
 
   updateGrid: function (grid) {
     //  Remove all body pieces from valid positions list
-    this.body.children.each(function (segment) {
+    this.layer.children.each(function (segment) {
 
       const bx = segment.x / 16
       const by = segment.y / 16
