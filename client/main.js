@@ -12,13 +12,10 @@ const game = new Phaser.Game({
   state: MainState
 })
 
-// Development Tools
-if (__DEV__) {
-  if (module.hot) {
-    // Setup hot module replacement
-    module.hot.accept('./main', () =>
-      setImmediate(() => {
-      })
-    )
-  }
-}
+// Development Tools (Not able to use hot-reload now)
+// if (__DEV__) {
+//   if (module.hot) {
+//     // Setup hot module replacement
+//     module.hot.accept('./main')
+//   }
+// }

@@ -14,7 +14,7 @@ const __TEST__ = config.compilerGlobals.__TEST__
 debug('Init webpack config.')
 const mainEntry = [paths.client('main')]
 if (__DEV__) {
-  mainEntry.push(`webpack-hot-middleware/client.js?path=${config.compilerPublicPath}__webpack_hmr`)
+  mainEntry.unshift(`webpack-hot-middleware/client.js?path=${config.compilerPublicPath}__webpack_hmr`)
 }
 const entry = {
   main: mainEntry
@@ -27,7 +27,7 @@ const webpackConfig = {
   entry: entry,
   output: {
     path: paths.dist(),
-    filename: __DEV__ ? `[name].bundle.js` : `[name].[${config.compilerHashType}].bundle.js`,
+    filename: __DEV__ ? '[name].bundle.js' : `[name].[${config.compilerHashType}].bundle.js`,
     publicPath: config.compilerPublicPath
   },
   resolve: {
