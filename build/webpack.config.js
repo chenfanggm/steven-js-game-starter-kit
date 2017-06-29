@@ -14,7 +14,7 @@ const __TEST__ = config.compilerGlobals.__TEST__
 debug('Init webpack config.')
 const mainEntry = [paths.client('main')]
 if (__DEV__) {
-  mainEntry.unshift(`webpack-hot-middleware/client.js?path=${config.compilerPublicPath}__webpack_hmr`)
+  mainEntry.unshift(`webpack-hot-middleware/client.js?path=${config.compilerPublicPath}__webpack_hmr&reload=true`)
 }
 const entry = {
   main: mainEntry
