@@ -17,8 +17,7 @@ if (__DEV__) {
   mainEntry.push(`webpack-hot-middleware/client.js?path=${config.compilerPublicPath}__webpack_hmr`)
 }
 const entry = {
-  main: mainEntry,
-  normalize: [paths.client('normalize')]
+  main: mainEntry
 }
 if (config.compilerVendors && config.compilerVendors.length) {
   entry['vendor'] = config.compilerVendors

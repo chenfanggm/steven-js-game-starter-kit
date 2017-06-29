@@ -1,6 +1,7 @@
-import './phaser'
-import config from './phaser.config'
-import MainState from './state/MainState'
+import './utils/normalize'
+import './libs/phaser'
+import config from './game.config'
+import MainState from './states/MainState'
 
 const game = new Phaser.Game({
   type: config.renderType,

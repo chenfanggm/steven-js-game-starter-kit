@@ -1,5 +1,5 @@
-import Snake from '../entity/Snake'
-import Food from '../entity/Food'
+import Snake from '../entities/Snake'
+import Food from '../entities/Food'
 
 
 const MainState = {
